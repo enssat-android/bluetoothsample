@@ -28,22 +28,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 
-data class Shortcut( val shortcutKey: Int,
-                     val modifiers: List<KeyModifier> = emptyList(),
-                     val releaseModifiers: Boolean = true,) {
-
-    companion object {
-        const val LEFT_CONTROL: KeyModifier = 0b1
-        const val LEFT_SHIFT: KeyModifier = 0b10
-        const val LEFT_ALT: KeyModifier = 0b100
-        const val LEFT_GUI: KeyModifier = 0b1000
-        const val RIGHT_CONTROL: KeyModifier = 0b1_0000
-        const val RIGHT_SHIFT: KeyModifier = 0b10_0000
-        const val RIGHT_ALT: KeyModifier = 0b100_0000
-        const val RIGHT_GUI: KeyModifier = 0b1000_0000
-    }
-}
-
 
 @Composable
 fun BluetoothUiConnection(bluetoothController: BluetoothController) {
