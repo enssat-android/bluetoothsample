@@ -2,6 +2,8 @@ package com.example.bluetoothsample
 
 object DescriptorCollection {
 
+    //https://www.usb.org/sites/default/files/hid1_11.pdf
+
     val MOUSE_KEYBOARD_COMBO = byteArrayOf(
         //MOUSE TLC
         0x05.toByte(), 0x01.toByte(),                         // USAGE_PAGE (Generic Desktop)

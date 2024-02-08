@@ -34,8 +34,11 @@ data class Shortcut( val shortcutKey: Int,
 
     companion object {
         const val LEFT_CONTROL: KeyModifier = 0b1
+        const val LEFT_SHIFT: KeyModifier = 0b10
         const val LEFT_ALT: KeyModifier = 0b100
         const val LEFT_GUI: KeyModifier = 0b1000
+        const val RIGHT_CONTROL: KeyModifier = 0b1_0000
+        const val RIGHT_SHIFT: KeyModifier = 0b10_0000
         const val RIGHT_ALT: KeyModifier = 0b100_0000
         const val RIGHT_GUI: KeyModifier = 0b1000_0000
     }
@@ -110,11 +113,54 @@ fun BluetoothDesk(bluetoothController: BluetoothController) {
         val keyboardSender = KeyboardSender(connected.btHidDevice, connected.hostDevice)
 
 
+
         fun press(shortcut: Shortcut, releaseModifiers: Boolean = true) {
             @SuppressLint("MissingPermission")
             val result = keyboardSender.sendKeyboard(shortcut.shortcutKey, shortcut.modifiers, releaseModifiers)
             if (!result) Toast.makeText(context,"can't find keymap for $shortcut",Toast.LENGTH_LONG).show()
         }
+
+        fun alphanum (){
+            press(Shortcut(KeyEvent.KEYCODE_A))
+            press(Shortcut(KeyEvent.KEYCODE_B))
+            press(Shortcut(KeyEvent.KEYCODE_C))
+            press(Shortcut(KeyEvent.KEYCODE_D))
+            press(Shortcut(KeyEvent.KEYCODE_E))
+            press(Shortcut(KeyEvent.KEYCODE_F))
+            press(Shortcut(KeyEvent.KEYCODE_G))
+            press(Shortcut(KeyEvent.KEYCODE_H))
+            press(Shortcut(KeyEvent.KEYCODE_I))
+            press(Shortcut(KeyEvent.KEYCODE_J))
+            press(Shortcut(KeyEvent.KEYCODE_K))
+            press(Shortcut(KeyEvent.KEYCODE_L))
+            press(Shortcut(KeyEvent.KEYCODE_M))
+            press(Shortcut(KeyEvent.KEYCODE_N))
+            press(Shortcut(KeyEvent.KEYCODE_O))
+            press(Shortcut(KeyEvent.KEYCODE_P))
+            press(Shortcut(KeyEvent.KEYCODE_Q))
+            press(Shortcut(KeyEvent.KEYCODE_R))
+            press(Shortcut(KeyEvent.KEYCODE_S))
+            press(Shortcut(KeyEvent.KEYCODE_T))
+            press(Shortcut(KeyEvent.KEYCODE_U))
+            press(Shortcut(KeyEvent.KEYCODE_V))
+            press(Shortcut(KeyEvent.KEYCODE_W))
+            press(Shortcut(KeyEvent.KEYCODE_X))
+            press(Shortcut(KeyEvent.KEYCODE_Y))
+            press(Shortcut(KeyEvent.KEYCODE_Z))
+
+            press(Shortcut(KeyEvent.KEYCODE_SPACE))
+
+            press(Shortcut(KeyEvent.KEYCODE_1,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
+            press(Shortcut(KeyEvent.KEYCODE_2,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
+            press(Shortcut(KeyEvent.KEYCODE_3,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
+            press(Shortcut(KeyEvent.KEYCODE_4,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
+            press(Shortcut(KeyEvent.KEYCODE_5,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
+            press(Shortcut(KeyEvent.KEYCODE_6,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
+            press(Shortcut(KeyEvent.KEYCODE_7,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
+            press(Shortcut(KeyEvent.KEYCODE_8,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
+            press(Shortcut(KeyEvent.KEYCODE_9,listOf(Shortcut.LEFT_SHIFT,Shortcut.RIGHT_SHIFT)))
+
+          }
 
         Column( modifier = Modifier.fillMaxWidth().padding(20.dp)) {
 
@@ -123,30 +169,12 @@ fun BluetoothDesk(bluetoothController: BluetoothController) {
             Spacer(modifier = Modifier.size(10.dp))
 
             Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
-                Button(onClick = { press(Shortcut(KeyEvent.KEYCODE_DPAD_LEFT)) }) {
-                    Text("<-")
+                Button(onClick = { alphanum()}) {
+                    Text("alphanum")
                 }
+
                 Spacer(modifier = Modifier.size(20.dp))
-                Button(onClick = { press(Shortcut(KeyEvent.KEYCODE_DPAD_RIGHT)) }) {
-                    Text("->")
-                }
-            }
 
-            Spacer(modifier = Modifier.size(10.dp))
-
-            Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
-                Button(onClick = {press(Shortcut(KeyEvent.KEYCODE_DPAD_LEFT,listOf(Shortcut.LEFT_ALT, Shortcut.LEFT_GUI)) )}) {
-                    Text("<- tab")
-                }
-                Spacer(modifier = Modifier.size(20.dp))
-                Button(onClick = {press(Shortcut( KeyEvent.KEYCODE_DPAD_RIGHT,listOf(Shortcut.RIGHT_ALT, Shortcut.RIGHT_GUI)))}) {
-                    Text("tab ->")
-                }
-            }
-
-            Spacer(modifier = Modifier.size(10.dp))
-
-            Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
                 Button(onClick = {press(Shortcut(KeyEvent.KEYCODE_F,listOf(Shortcut.LEFT_CONTROL, Shortcut.LEFT_GUI)))}) {
                     Text("full screen")
                 }
